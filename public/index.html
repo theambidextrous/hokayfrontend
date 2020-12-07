@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>%REACT_APP_WEBSITE_NAME%</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="%REACT_APP_WEBSITE_DESCRIPTION%"
+    />
+    <meta
+      name="keywords"
+      content="%REACT_APP_WEBSITE_META_KW%"
+    />
+    <meta name="author" content="%REACT_APP_WEBSITE_DEVELOPER%" />
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="%REACT_APP_DOMAIN%/assets/img/favicon.ico" />
+    <link rel="canonical" href="%REACT_APP_DOMAIN%"/>
+    <!-- google font -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"
+      rel="stylesheet"
+    />
+
+    <!-- for slider -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+      crossorigin="anonymous"
+    ></script>
+    <!-- rich editor IE pollyfil -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=String.prototype.startsWith,Array.from,Array.prototype.fill,Array.prototype.keys,Array.prototype.findIndex,Number.isInteger&flags=gated"></script>
+    <!-- <script src="https://js.stripe.com/v3/"></script> -->
+    <!-- for Animation -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+    />
+    <style>
+      .hero-6-bg-cstm{
+        background-image: url(%REACT_APP_DOMAIN%/assets/img/header.png);
+        background-size:cover!important;
+      }
+      .job-form-right{
+        border-top: 1px solid #d8d8d8!important;
+        border-radius: 1px!important;
+        padding: 20px!important;
+      }
+      .corp-use{
+        max-width: 200px!important;
+      }
+      .job-form{
+        background-color: #efefef!important;
+        padding: 10px!important;
+        border-top: 1px solid #d8d8d8!important;
+        border-radius: 1px!important;
+      }
+      .badge-label{
+        font-size: 22px!important;
+        margin-left: 20px;
+      }
+      .rec-badge{
+        font-size: 13px!important;
+        margin-left: 10px!important;
+        background: #fd5353!important;
+        color: #ffffff!important;
+        padding: 5px!important;
+        border-radius: 5px;
+        display:inline-block!important;
+      }
+      .benefit-badge{
+        font-size: 14px!important;
+        margin-left: 15px!important;
+        background: #ffffff!important;
+        border: 1px solid #fd5353!important;
+        color: #fd5353!important;
+        padding: 5px!important;
+        border-radius: 5px!important;
+        display:inline-block!important;
+        text-transform:uppercase!important;
+        padding:3px!important;
+      }
+      .flabel{
+        color: black!important;
+        font-size: 22px!important;
+        font-weight: 700!important;
+      }
+      .call-to-action{
+        color: black!important;
+      }
+      .section-label{
+        color: #a5a4a4!important;
+        font-size: 22px!important;
+        font-weight: 700!important;
+      }
+      .form-inner{
+        background-color: #ffffff!important;
+        margin: 10px!important;
+        border-radius: 5px!important;
+        padding: 25px!important;
+        border: 1px solid #d8d8d8!important;
+      }
+      .navbar-light {
+        background-color: #2f3ee8!important;
+        border-bottom: 1px solid #000000!important;
+      }
+      /* body{
+        background-image: url(%REACT_APP_DOMAIN%/assets/img/bg-svg.png);
+        background-size:cover!important;
+        background-position-x: top!important;
+        background-position-y: top!important;
+        background-attachment:scroll!important;
+      } */
+      .input-ios {
+        padding: 15px 30px!important;
+        width: 100%!important;
+        font-size: 13px!important;
+        height: 50px!important;
+        border: none!important;
+        border: solid 2px #dcdfe2!important;
+        outline: none !important;
+        background-color: transparent!important;
+        border-radius: 30px!important;
+    }
+    .btn-ios {
+        padding: 15px 30px!important;
+        width: 100%!important;
+        font-size: 13px!important;
+        height: 50px!important;
+        border: none!important;
+        border-bottom: solid 2px #dcdfe2!important;
+        outline: none !important;
+        background-color: transparent!important;
+        border-radius: 30px!important;
+    }
+    .tox-tinymce {
+        padding: 15px 30px!important;
+        width: 100%!important;
+        font-size: 13px!important;
+        border: solid 2px #dcdfe2!important;
+        outline: none !important;
+        background-color: transparent!important;
+        border-radius: 30px!important;
+    }
+    .ios-list{
+      list-style: none!important;
+      color: #8a8a8a!important;
+      margin: 0 8px!important;
+      cursor: pointer;
+    }
+    .ios-social{
+      margin: 0 4px!important;
+      padding-left: 0px!important;
+      padding-right: 0px!important;
+    }
+    .ios-pg{
+      margin: 20px!important;
+      border-radius: 20px!important;
+      background: #fff!important;
+      padding: 10px!important;
+    }
+    .a-btn {
+      padding: 12px 32px!important;
+      font-size: 15px;
+      text-decoration: none!important;
+      font-weight: 500;
+    }
+    /* ._loading_overlay_wrapper{
+      z-index: 999;
+    }
+    .css-hajlmr {
+      width: 100px!important;
+      height: 100px!important;
+      border: 16px solid #5461fb!important;
+    }
+    .css-vrt42o {
+      width: 100px!important;
+      height: 100px!important;
+      border: 16px solid #fd5353!important;
+    } */
+    .close-btn{
+      border: solid 1px #fe2b25;
+    border-radius: 10px;
+    color: red;
+    background: white;
+    float: right;
+    }
+    .error-custom{
+      color: #fd5353!important;
+    }
+    .succ-custom{
+      color: #155724!important;
+    }
+    .s-form form {
+        position: relative;
+        max-width: 500px;
+        margin: 0px auto;
+    }
+      .s-form input {
+        padding: 16px 20px;
+        width: 100%;
+        font-size: 17px;
+        border: solid 2px #d8d8d8;
+        outline: none !important;
+        padding-right: 160px;
+        padding-left: 30px;
+        background-color: white;
+        border-radius: 30px;
+      }
+      .btn-outlined{
+        border: solid 2px #5461fb!important;
+        background: transparent!important;
+      }
+      .s-form button {
+        background-color: transparent;
+        position: absolute;
+        top: 1px;
+        right: 5px;
+        border: none;
+      }
+      .s-title{
+        color: #fd5353!important;
+        font-weight: 900;
+        font-size: 24px!important;
+      }
+      .no-jobs{
+        color: #777!important;
+        font-weight: 600;
+        font-size: 16px!important;
+        text-align: center!important;
+      }
+      .small-btn{
+        line-height: 0.8!important;
+        max-width: 130px;
+        margin-right: 4mm;
+      }
+      .btn-simple{
+        background-color: #fd5353!important;
+        border-color: #fd5353!important;
+        color: #fff!important;
+      }
+      .btn-simple-inv{
+        color: #fd5353!important;
+        border-color: #fd5353!important;
+        background-color: #fff!important;
+      }
+      .call-to-action{
+        font-weight: 900;
+        font-size: 22px;
+      }
+      .btn-action {
+        background-color: #2f3fe8!important;
+        border-color: #2f3fe8!important;
+        color: #fff!important;
+        border-radius: 20px!important;
+        display: inline!important;
+        margin-left: 15px!important;
+      }
+      .img-custom{
+        max-width: 300px!important;
+      }
+      .logo-custom{
+        min-height: 60px!important;
+      }
+      ::placeholder {
+        color: #7e7e7e!important;
+        font-size: 14px!important;
+        font-weight: 600;
+      }
+      .smaller-hero {
+        padding: 60px 0 20px 0px;
+      }
+      .smaller-f {
+        padding: 60px 0 20px 0px!important;
+      }
+      .smaller-mid {
+        padding: 60px 0 20px 0px!important;
+      }
+      .smaller-prof {
+        padding: 110px 0 20px 0px!important;
+      }
+      .img-prof{
+        max-width:50px!important;
+      }
+      .radio-custom-left{
+        margin-right: 30px!important;
+      }
+      .section-custom{
+        padding-top: 50px!important;
+        padding-bottom: 20px!important;
+      }
+      .job-meta{
+        vertical-align: text-bottom;
+        margin-left: 10px;
+        font-size: 14px;
+      }
+      .meta-right{
+        vertical-align: text-bottom;
+        margin-right: 10px;
+        font-size: 14px;
+        float: right;
+      }
+      .t-tag{
+        background: black;
+        padding: 5px;
+        border-radius: 5px;
+        color: #fff;
+      }
+      .tag-nav{
+        margin: 8px!important;
+      }
+      .tag-content-c{
+        padding: 15px!important;
+        background: white!important;
+        border-radius: 15px!important;
+        margin-bottom: 10px!important;
+        margin-top: 10px!important;
+        text-align: center;
+      }
+      .tag-btn{
+        font-size: 16px;
+        color: white;
+        border-radius: 20px;
+        max-height: 20px;
+        padding: 2px;
+      }
+      .meta-right i{
+        vertical-align: middle!important;
+        font-size: 17px!important;
+      }
+      .sbox-custom{
+        padding: 8px 10px 8px!important;
+        background: #ffffff;
+        border-radius: 20px!important;
+        /* border-radius: 0px 50px 0px 50px!important; */
+      }
+      .show-logo-badge{
+        background-size: 100%;
+        width: 3em;
+        height: 3em;
+        display: inline-block;
+        vertical-align: middle;
+        background-color: rgb(255, 255, 255);
+        object-fit: contain;
+        object-position: center center;
+        overflow: hidden;
+        border-radius: 0.2em;
+        background-position: center center;
+        background-repeat: no-repeat;
+        margin: 0px 0.2em 0px 0px;
+      }
+      .show-logo-badge span{
+        color: rgb(218, 214, 210);
+        font-weight: 700;
+        font-size: 1.5em;
+        text-align: center;
+        line-height: 2em;
+        vertical-align: middle;
+        margin: 0px;
+      }
+      .company-title{
+        margin-bottom: 0px!important;
+        font-size: 13px!important;
+      }
+      .s-tags{
+        min-width: 10em;
+        max-width: 16em;
+        padding: 0;
+        margin: 0;
+        padding-left: .5em;
+      }
+      .location-title{
+        margin-bottom: 0px!important;
+        text-transform: uppercase;
+        font-weight: 800;
+        font-size: .75em;
+        background: #737373;
+        border-radius: 3px;
+        cursor: pointer;
+        color: #fff;
+        padding: 0;
+        padding-right: .35em;
+        padding-left: .35em;
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: fit-content;
+        display: inline-block;
+        vertical-align: middle;
+        text-overflow: ellipsis;
+        background: #ddd;
+        font-size: 10px;
+        padding: 1.5px;
+        padding-left: 4px;
+        padding-right: 4px;
+        font-weight: 800;
+        color: #0f1115;
+      }
+      .img-txt{
+        max-width: 4em;
+        text-align: center;
+        border: solid 1px #efefef;
+        border-image: initial;
+        background-color: #ffffff;
+        border-radius: 8px;
+      }
+      .service-box:hover, .service-box.active {
+        /* pointer-events:none!important; */
+        background: #5461fb!important;
+      }
+      .service-box:hover .service-title,
+      .service-box:hover a,
+      .service-box.active
+      .service-title,
+      .service-box:hover .job-meta,
+      .service-box.active a {
+          color:#ffffff!important;
+      }
+      .section-dark{
+        background: #efefef!important;
+      }
+      .btn-pointed{
+        border-radius: 200px!important;
+      }
+      .hcustom{
+        margin-top: 5rem!important;
+      }
+      .j-meta-btn{
+        padding: 2px 15px;
+        border-top: solid 0px #fff !important;
+        border-left: solid 0px #fff !important;
+        border-right: solid 0px #fff !important;
+        margin: 5px;
+      }
+      .j-meta-btn-share{
+        border: solid 1px #fd5353 !important;
+        margin: 5px;
+        background: #fd5353 !important;
+        color: #fff !important;
+      }
+      .submit-job{
+        font-size: 24px;
+        font-weight: 900;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 25px;
+        padding-right: 25px;
+        border: solid 1px #fd5353;
+        background: #fd5353;
+        color: white;
+        border-radius: 10px;
+      }
+      .footer-span{
+        display:inline-flex!important;
+        margin-right: 8px!important;
+      }
+      .subscribe-job{
+        font-size: 18px;
+        font-weight: 600;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 15px;
+        padding-right: 15px;
+        border: solid 1px #fd5353;
+        background: transparent;
+        color: #fd5353;
+        border-radius: 10px;
+      }
+      .post-job
+      {
+        min-width: 157px!important;
+        /* font-size: 14px!important; */
+
+      }
+      .apply-job-content{
+        padding: 20px!important;
+        background: white!important;
+        border-radius: 15px!important;
+        margin-bottom: 30px!important;
+        padding-bottom: 15px!important;
+        text-align: center;
+      }
+      .tag-content{
+        padding: 1px!important;
+        background: transparent!important;
+        margin-bottom: 1px!important;
+        padding-bottom: 0px!important;
+        text-align: center;
+      }
+      .primary-tag-title{
+        color: black!important;
+        text-align: center!important;
+        font-weight: 600!important;
+      }
+      .primary-tag-icon{
+        width: 30px!important;
+        height:30px!important;
+      }
+      .j-meta-btn-apply{
+        border: solid 1px #5461fb !important;
+        margin: 5px;
+        background: #5461fb !important;
+        color: #fff !important;
+      }
+      @media (max-width: 425px){
+        .smaller-hero {
+          padding: 60px 0 20px 0px!important;
+        }
+      }
+    body {
+      overflow-x: hidden !important;
+      /* background-image: url(%REACT_APP_DOMAIN%/assets/img/bg-svg.png); */
+    }
+    .container {
+        max-width: 85% !important;
+        overflow-x: hidden !important;
+    }
+    .floating-foot{
+      border-top: solid 1px #efefef!important;
+      margin-top: -31px!important;
+      background: white!important;
+      padding-top: 35px!important;
+    }
+    .floating-foot-b{
+      border-top: solid 1px #efefef!important;
+      margin-top: -20px!important;
+      background: #181b1f!important;
+      padding-top: 20px!important;
+    }
+    @media screen and (max-width: 667px) {
+      body {
+          overflow-x: hidden !important;
+          /* background-image: url(%REACT_APP_DOMAIN%/assets/img/bg-svg.png); */
+          background-size:cover!important;
+          background-position-x: top!important;
+          background-position-y: top!important;
+          background-attachment:scroll!important;
+      }
+      .container {
+          max-width: 100% !important;
+          overflow-x: hidden !important;
+      }
+    }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
