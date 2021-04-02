@@ -230,7 +230,7 @@ class Services extends Component {
                         <span className="t-tag">
                             <a href={process.env.REACT_APP_DOMAIN} className="tag-btn">x</a>
                             {" "}
-                            {this.state.current.replace('-', ' ')} Jobs
+                            {this.state.current.replace('-', ' ')}
                         </span>
                     </p>
                 </div>
