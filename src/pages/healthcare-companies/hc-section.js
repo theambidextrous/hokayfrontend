@@ -19,6 +19,7 @@ class Section extends Component {
   };
 
   render() {
+    return null;
     return (
       <React.Fragment>
         {/* HERO START */}

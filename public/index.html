@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BDB2DR9G7G"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-BDB2DR9G7G');
+    </script>
     <meta charset="utf-8" />
     <title>%REACT_APP_WEBSITE_NAME%</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
+    <!-- <meta
       name="description"
       content="%REACT_APP_WEBSITE_DESCRIPTION%"
     />
     <meta
       name="keywords"
       content="%REACT_APP_WEBSITE_META_KW%"
-    />
+    /> -->
     <meta name="author" content="%REACT_APP_WEBSITE_DEVELOPER%" />
 
     <!-- favicon -->
     <link rel="shortcut icon" href="%REACT_APP_DOMAIN%/assets/img/favicon.ico" />
-    <link rel="canonical" href="%REACT_APP_DOMAIN%"/>
+    <!-- <link rel="canonical" href="%REACT_APP_DOMAIN%"/> -->
     <!-- google font -->
     <link
       href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"
@@ -38,8 +47,24 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
     />
     <style>
+      .tag-area{
+        background: white!important;
+        padding: 15px!important;
+        border-radius: 15px!important;
+        margin-bottom: 1px!important;
+        text-align: center;
+      }
+      .tag-area-link{
+        font-weight: 700;
+        color: black;
+      }
+      .list-group-item {
+        border: 0px solid rgba(0,0,0,.125)!important;
+        border-left: 1px solid rgba(0,0,0,.125)!important;
+        padding: .45rem 0.85rem!important;
+      }
       .hero-6-bg-cstm{
-        background-image: url(%REACT_APP_DOMAIN%/assets/img/header.png);
+        /* background-image: url(%REACT_APP_DOMAIN%/assets/img/header.png); */
         background-size:cover!important;
       }
       .job-form-right{
@@ -186,15 +211,31 @@
     background: white;
     float: right;
     }
+    .p-bar{
+      width: 100%!important;
+      background-color: #ffffff!important;
+    }
+    .div-link{
+      cursor: pointer;
+    }
+    .spinner-box{
+      margin: auto!important;
+    }
+    .progress-bar-row
+    {
+      margin-right: 4px!important;
+      margin-left: 4px!important;
+    }
     .error-custom{
       color: #fd5353!important;
+      font-size: 18px!important;
     }
     .succ-custom{
       color: #155724!important;
     }
     .s-form form {
         position: relative;
-        max-width: 500px;
+        max-width: 80%;
         margin: 0px auto;
     }
       .s-form input {
@@ -254,7 +295,7 @@
         border-color: #2f3fe8!important;
         color: #fff!important;
         border-radius: 20px!important;
-        display: inline!important;
+        display: inline-block!important;;
         margin-left: 15px!important;
       }
       .img-custom{

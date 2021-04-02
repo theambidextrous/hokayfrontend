@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "reactstrap";
-import { withRouter, Link, } from 'react-router-dom'
-//Import Section Title
-// import SectionTitle from "../../../Common/SectionTitle";
+import { withRouter, Link, Redirect, } from 'react-router-dom'
+
+//Import Spinner Box
+import SpinnerBox from "../../components/Common/SpinnerBox";
+
 import ServiceBox from "./hc-service-box";
 import { findByCompany, searchJobs } from "../../api/api";
+import {Helmet} from "react-helmet";
 //Import sharebuttons
 import {
   EmailShareButton,
@@ -38,6 +41,7 @@ class Services extends Component {
     super(props);
     this.handleSearch = this.handleSearch.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
+    this.gotoJobPost = this.gotoJobPost.bind(this);
   }
   state = {
     current:this.props.location.pathname.split('/').slice(-1).pop(),
@@ -50,33 +54,39 @@ class Services extends Component {
     perPage:50,
     services: [],
     isError: false,
-    search: ""
+    search: "",
+    preload:true,
   };
   handlePageClick = (data) => {
     let selected = data.selected;
     let offset = Math.ceil(selected * this.state.perPage);
-    this.setState({ ...this.state, offset:offset }, () => {
+    this.setState({ ...this.state, offset:offset,preload:true, }, () => {
       findByCompany(this.state.current, this.state.offset)
-      .then( res => this.setState({...this.state, services: res.payload, pageCount: Math.ceil(res.total_count / res.limit) }))
-      .catch(() => this.setState({...this.state, isError: true }));
+      .then( res => this.setState({...this.state, services: res.payload, pageCount: Math.ceil(res.total_count / res.limit),preload:false, }))
+      .catch(() => this.setState({...this.state, isError: true, preload:false, }));
     });
   };
+  gotoJobPost = (link) => {
+    window.location.href = link;
+  }
   handleSearch(event) {
       const v = event.target.value
-      this.setState({...this.state, offset: 0});
+      this.setState({...this.state, offset: 0, search:v});
       if( v.length > 0 )
       {
+        this.setState({...this.state, offset: 0, search:v, preload:true});
         searchJobs(v)
         .then( (res) => {
           this.setState({
             ...this.state,
             services: res.payload,
             pageCount: Math.ceil(res.total_count / res.limit),
-            search: v
+            search: v,
+            preload:false,
           });
         })
         .catch((err) => {
-          this.setState({...this.state, services: [], search: v});
+          this.setState({...this.state, services: [], search: v, preload:false});
         });
         this.forceUpdate();
       }
@@ -88,16 +98,16 @@ class Services extends Component {
         this.setState({...this.state, search: ""});
       }
   }
-  componentDidMount() {
-    // this.setState({...this.state, current: this.props.location.pathname.split('/').slice(-1).pop()});
+  componentWillMount() {
+    this.setState({...this.state, preload:true});
     if (this.state.search === "")
     {
       findByCompany(this.state.current, this.state.offset)
       .then( res =>  {
           console.log(res);
-        this.setState({...this.state, services: res.payload, pageCount: Math.ceil(res.total_count / res.limit) })
+        this.setState({...this.state, services: res.payload, pageCount: Math.ceil(res.total_count / res.limit), preload:false })
       })
-      .catch(() => this.setState({...this.state, isError: true }));
+      .catch(() => this.setState({...this.state, isError: true,preload:false }));
     }
     else
     {
@@ -108,6 +118,15 @@ class Services extends Component {
     const joblist = this.state.services;
     return (
       <React.Fragment>
+        {/* SEO meta */}
+        <Helmet>
+            <title>
+              {this.state.current.replace('-', ' ')+ " Jobs on " + process.env.REACT_APP_DOMAIN_NAME}
+            </title>
+            <meta name="description" content={this.state.current.replace('-', ' ') + " Jobs on " + process.env.REACT_APP_DOMAIN_NAME + " in United states. Texas, California, Bellevue, Aneihim, New york"}/>
+            <meta name="keywords" content={process.env.REACT_APP_WEBSITE_META_KW}/>
+            <link rel="canonical" href={process.env.REACT_APP_DOMAIN + '/jobs/healthcare-companies/' + this.state.current} />
+        </Helmet>
         {/* SERVICE START  */}
         <section id="service" className="section section-custom section-dark position-relative">
           <Container>
@@ -117,7 +136,7 @@ class Services extends Component {
               description=""
             /> */}
             {/* Primary tags */}
-            <Row className="justify-content-center tag-content">
+            {/* <Row className="justify-content-center tag-content">
               <div className="col-lg-1 tag-nav">
                 <p>
                     <a href={process.env.REACT_APP_DOMAIN} 
@@ -190,20 +209,20 @@ class Services extends Component {
                   </a>
                 </p>
               </div>
-            </Row>
+            </Row> */}
             {/* post a job */}
-            <a href={process.env.REACT_APP_DOMAIN + '/employer/new/job'}>
+            <div className="div-link" onClick={() => this.gotoJobPost(process.env.REACT_APP_DOMAIN + '/employer/new/job')}>
               <Row className="justify-content-center apply-job-content">
                 <div className="col-lg-12">
                   <p style={{marginBottom: 0}}>
                       <span className="call-to-action">
                       👉 Hiring in <u>Healthcare</u>? Reach 1,200,000+ Job seekers on the 🏆 #1 Healthcare jobs board 
                       </span>
-                      <a href={process.env.REACT_APP_DOMAIN + '/employer/new/job'} className="btn btn-orange btn-pointed small-btn btn-action a-btn post-job">Post a job</a>
+                      <a href={process.env.REACT_APP_DOMAIN + '/employer/new/job'} className="btn btn-orange btn-pointed small-btn btn-action a-btn post-job ">Post a job</a>
                   </p>
                 </div>
               </Row>
-            </a>
+            </div>
             {/* current tag */}
             <Row className="justify-content-center tag-content-c">
                 <div className="col-lg-12">
@@ -258,15 +277,20 @@ class Services extends Component {
                     </RedditShareButton>
                   </p>
               </div>
-              <div className="col-lg-12">
-                <div className="row">
-                  {joblist.length === 0 && this.state.isError === false && (
-                    <h3 className="no-jobs">No jobs found</h3>
-                  )}
-                </div>
-              </div>
             </Row>
             <Row className="justify-content-center">
+              <Col lg={12}>
+                <div className="col-lg-12">
+                  <div className="row progress-bar-row">
+                    { this.state.preload === true && (
+                      <SpinnerBox/>
+                    )}
+                    {joblist.length === 0 && this.state.isError === false && this.state.preload === false && (
+                      <h3 className="no-jobs">No jobs found</h3>
+                    )}
+                  </div>
+                </div>
+              </Col>
               <Col lg={12}>
                 {this.state.isError == true && (
                   <h3 className="no-jobs">Error occured No jobs found</h3>

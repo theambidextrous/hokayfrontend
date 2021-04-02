@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col ,ListGroup, ListGroupItem,} from "reactstrap";
 
-//Import Section Title
-import SectionTitle from "../Common/SectionTitle";
+//Import Spinner Box
+import SpinnerBox from "../Common/SpinnerBox";
 import ServiceBox from "./service-box";
 import { getJobs, searchJobs } from "../../api/api";
 //Import sharebuttons
@@ -41,6 +41,7 @@ class Services extends Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
     this.handleLoading = this.handleLoading.bind(this);
+    this.gotoJobPost = this.gotoJobPost.bind(this);
   }
   state = {
     description:"",
@@ -54,32 +55,38 @@ class Services extends Component {
     isError: false,
     search: "",
     hasMore:false,
+    preload:true,
   };
+  gotoJobPost = (link) => {
+    window.location.href = link;
+  }
   handlePageClick = (data) => {
     let selected = data.selected;
     let offset = Math.ceil(selected * this.state.perPage);
-    this.setState({ ...this.state, offset:offset }, () => {
+    this.setState({ ...this.state, offset:offset, preload:true, }, () => {
       getJobs(this.state.offset)
-      .then( res => this.setState({...this.state, services: res.payload, pageCount: Math.ceil(res.total_count / res.limit) }))
-      .catch(() => this.setState({...this.state, isError: true }));
+      .then( res => this.setState({...this.state, services: res.payload, pageCount: Math.ceil(res.total_count / res.limit), preload:false }))
+      .catch(() => this.setState({...this.state, isError: true, preload:false }));
     });
   };
   handleSearch = (event) => {
       const v = event.target.value
-      this.setState({...this.state, offset: 0});
+      this.setState({...this.state, offset: 0, search:v,});
+      // console.log('seach', v);
       if( v.length > 0 )
       {
+        this.setState({...this.state, offset: 0, search:v, preload:true});
         searchJobs(v)
         .then( (res) => {
           this.setState({
             ...this.state,
             services: res.payload,
             pageCount: Math.ceil(res.total_count / res.limit),
-            search: v
+            preload:false,
           });
         })
         .catch((err) => {
-          this.setState({...this.state, services: [], search: v});
+          this.setState({...this.state, services: [], search: v, preload:false});
         });
         this.forceUpdate();
       }
@@ -88,7 +95,7 @@ class Services extends Component {
         getJobs(this.state.offset)
         .then( res => this.setState({...this.state, services: res.payload, pageCount: Math.ceil(res.total_count / res.limit), }))
         .catch(() => this.setState({...this.state, isError: true }));
-        this.setState({...this.state, search: ""});
+        this.setState({...this.state, search: v});
       }
   }
   handleLoading = () => {
@@ -98,11 +105,13 @@ class Services extends Component {
       .then( res => this.setState({
         ...this.state, 
         services: res.payload, 
-        pageCount: Math.ceil(res.total_count / res.limit) 
+        pageCount: Math.ceil(res.total_count / res.limit),
+        preload:false, 
       }))
       .catch(() => this.setState({
         ...this.state, 
-        isError: true 
+        isError: true,
+        preload:false,
       }));
     }
     else
@@ -111,10 +120,14 @@ class Services extends Component {
     }
   }
   componentWillMount(){
+    this.setState({...this.state, preload:true});
     this.handleLoading();
   }
+  componentWillUnmount(){
+    return this.setState([]);
+  }
   componentDidMount() {
-   
+    
   }
   render() {
     const joblist = this.state.services;
@@ -129,94 +142,19 @@ class Services extends Component {
               title="Featured Jobs"
               description=""
             /> */}
-            {/* Primary tags */}
-            <Row className="justify-content-center tag-content">
-              <div className="col-lg-1 tag-nav">
-                <p>
-                    <a href={process.env.REACT_APP_DOMAIN} 
-                    className="">
-                      <img className="primary-tag-icon" src={hok}/>
-                      <span className="primary-tag-title">Healthcare Jobs</span>
-                    </a>
-                </p>
-              </div>
-              <div className="col-lg-1 tag-nav">
-                <p>
-                    <a href={process.env.REACT_APP_DOMAIN + '/jobs/tag/Medical-Doctor'} 
-                    className="">
-                      <img className="primary-tag-icon" src={md}/>
-                      <span className="primary-tag-title">Medical Doctor</span>
-                    </a>
-                </p>
-              </div>
-              <div className="col-lg-1 tag-nav">
-                <p>
-                  <a href={process.env.REACT_APP_DOMAIN + '/jobs/tag/Nursing'} 
-                  className="">
-                    <img className="primary-tag-icon" src={ns}/>
-                    <span className="primary-tag-title">Nursing</span>
-                  </a>
-                </p>
-              </div>
-              <div className="col-lg-1 tag-nav">
-                <p>
-                  <a href={process.env.REACT_APP_DOMAIN + '/jobs/tag/Pharmacy'} 
-                  className="">
-                    <img className="primary-tag-icon" src={phar}/>
-                    <span className="primary-tag-title">Pharmacy</span>
-                  </a>
-                </p>
-              </div>
-              <div className="col-lg-1 tag-nav">
-                <p>
-                  <a href={process.env.REACT_APP_DOMAIN + '/jobs/tag/Surgeon'} 
-                  className="">
-                    <img className="primary-tag-icon" src={sg}/>
-                    <span className="primary-tag-title">Surgeon</span>
-                  </a>
-                </p>
-              </div>
-              <div className="col-lg-1 tag-nav">
-                <p>
-                  <a href={process.env.REACT_APP_DOMAIN + '/jobs/tag/Health-Records'} 
-                  className="">
-                    <img className="primary-tag-icon" src={hrec}/>
-                    <span className="primary-tag-title">Health Records</span>
-                  </a>
-                </p>
-              </div>
-              <div className="col-lg-1 tag-nav">
-                <p>
-                  <a href={process.env.REACT_APP_DOMAIN + '/jobs/tag/Scanning'} 
-                  className="">
-                    <img className="primary-tag-icon" src={xr}/>
-                    <span className="primary-tag-title">Hospital Scans</span>
-                  </a>
-                </p>
-              </div>
-              <div className="col-lg-1 tag-nav">
-                <p>
-                  <a href={process.env.REACT_APP_DOMAIN + '/jobs/tag/Maternal-Health'} 
-                  className="">
-                    <img className="primary-tag-icon" src={ant}/>
-                    <span className="primary-tag-title">Maternal Health</span>
-                  </a>
-                </p>
-              </div>
-            </Row>
             {/* post a job */}
-            <a href={process.env.REACT_APP_DOMAIN + '/employer/new/job'}>
+            <div className="div-link" onClick={() => this.gotoJobPost(process.env.REACT_APP_DOMAIN + '/employer/new/job')}>
               <Row className="justify-content-center apply-job-content">
                 <div className="col-lg-12">
                   <p>
                       <span className="call-to-action">
                       👉 Hiring in <u>Healthcare</u>? Reach 1,200,000+ Job seekers on the 🏆 #1 Healthcare jobs board 
                       </span>
-                      <a href={process.env.REACT_APP_DOMAIN + '/employer/new/job'} className="btn btn-orange btn-pointed small-btn btn-action a-btn post-job">Post a job</a>
+                      <a href={process.env.REACT_APP_DOMAIN + '/employer/new/job'} className="btn btn-orange btn-pointed small-btn btn-action a-btn post-job ">Post a job</a>
                   </p>
                 </div>
               </Row>
-            </a>
+            </div>
             {/* search bar */}
             <Row className="justify-content-center">
               <Col lg={12}>
@@ -233,6 +171,31 @@ class Services extends Component {
                 </div>
               </Col>
             </Row>
+            <br></br>
+            {/* Primary tags */}
+            <Row className="justify-content-center tag-area">
+              <Col lg={12} className="bbb">
+                <ListGroup horizontal>
+                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN}>Healthcare jobs</ListGroupItem>
+                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/physician-assistant-jobs'}>physician assistant jobs</ListGroupItem>
+                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/pharmacy-technician-jobs'}>pharmacy technician jobs</ListGroupItem>
+                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/pharmacist-jobs'}>pharmacist jobs</ListGroupItem>
+                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/medical-assistant-jobs'}>medical assistant jobs</ListGroupItem>
+                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/psychologist-jobs'}>psychologist jobs</ListGroupItem>
+                </ListGroup>
+                
+                <ListGroup horizontal>
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/nurse-jobs'}>nurse jobs</ListGroupItem>
+                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/rn-jobs'}>rn jobs</ListGroupItem>
+                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/nurse-practitioner-jobs'}>nurse practitioner jobs</ListGroupItem>
+                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/dental-assistant-jobs'}>dental assistant jobs</ListGroupItem>
+                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/physical-therapist-jobs'}>physical therapist jobs</ListGroupItem>
+                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/ occupational-therapist-jobs'}>occupational therapist jobs</ListGroupItem>
+                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/entist-jobs'}>dentist jobs</ListGroupItem>
+              </ListGroup>
+              </Col>
+            </Row>
+            <br></br>
             <Row className="align-items-center">
               <div className="col-lg-12">
                 <p> <span className="mr-2">Share Page</span> 
@@ -259,15 +222,20 @@ class Services extends Component {
                     </RedditShareButton>
                   </p>
               </div>
-              <div className="col-lg-12">
-                <div className="row">
-                  {joblist.length === 0 && this.state.isError === false && (
-                    <h3 className="no-jobs">No jobs found</h3>
-                  )}
-                </div>
-              </div>
             </Row>
             <Row className="justify-content-center">
+              <Col lg={12}>
+                <div className="col-lg-12">
+                  <div className="row progress-bar-row">
+                    { this.state.preload === true && (
+                      <SpinnerBox/>
+                    )}
+                    {joblist.length === 0 && this.state.isError === false && this.state.preload === false && (
+                      <h3 className="no-jobs">No jobs found</h3>
+                    )}
+                  </div>
+                </div>
+              </Col>
               <Col lg={12}>
                 {this.state.isError == true && (
                   <h3 className="no-jobs">Error occured No jobs found</h3>

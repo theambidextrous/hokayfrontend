@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 import { Container, Row, Col } from "reactstrap";
 import {getJob} from "../../api/api";
-import { withRouter, Link, } from 'react-router-dom'
+import { withRouter, Link, } from 'react-router-dom';
+import {Helmet} from "react-helmet";
 //Import sharebuttons
 import {
     EmailShareButton,
@@ -40,7 +41,10 @@ class Section extends Component {
     return false;
   }
   componentWillMount() {
-    const jobid = parseInt(this.props.location.pathname.split('/').slice(-1).pop());
+    // const jobid = parseInt(this.props.location.pathname.split('/').slice(-1).pop());
+    const jobid = parseInt(this.props.location.pathname.split('/').slice(-2)[0]);
+    // let fgg = '/jobs/job/49/job-title-goes-here';
+    // console.log('job id is', fgg.split('/').slice(-2)[0]);
     const sharelink = this.state.shareUrl + this.props.location.pathname;
     this.setState({...this.state, shareUrl:sharelink});
     // console.log("job id = " + JSON.stringify(jobid));
@@ -75,6 +79,13 @@ class Section extends Component {
       const jobdata = this.state.jobData;
     return (
       <React.Fragment>
+        {/* SEO meta */}
+        <Helmet>
+            <title>{jobdata.title + " job at " + jobdata.organization + " posted on " + process.env.REACT_APP_DOMAIN_NAME + " in " + jobdata.location}</title>
+            <meta name="description" content={jobdata.title + " job at " + jobdata.organization + " posted on " + process.env.REACT_APP_DOMAIN_NAME + " in " + jobdata.location + ". Brief: " + jobdata.brief}/>
+            <meta name="keywords" content={process.env.REACT_APP_WEBSITE_META_KW}/>
+            <link rel="canonical" href={this.state.shareUrl} />
+        </Helmet>
         {/* HERO START */}
         <section className="hero-6-bg smaller-f position-relative" id="home">
           <Container>
@@ -153,7 +164,7 @@ class Section extends Component {
                         Apply Job
                       </a>
                     ):(
-                      <a href={jobdata.link + '&utm_source=' + process.env.REACT_APP_DOMAIN} className="btn btn-pointed btn-outlined j-meta-btn-apply" target="_blank">
+                      <a href={jobdata.link} className="btn btn-pointed btn-outlined j-meta-btn-apply" target="_blank">
                         <i className="remixicon-briefcase-fill mr-1" />
                         Apply Job
                       </a>

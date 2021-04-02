@@ -44,7 +44,6 @@ class SectionForm extends Component {
       isCreatedJob: false,
       showModal:false,
       resMessage: 'All fields are required',
-      
       isValidOrganization: true,
       isValidTitle: true,
       isValidPrimaryTag:true,
@@ -127,7 +126,7 @@ class SectionForm extends Component {
   }
   handleInvAddressChange(event) {
     const v = event.target.value;
-    if ( v.length >= 5)
+    if ( v.length >= 3)
     {
         this.setState({...this.state, invAddress: v, isValidInvAddress: true});
     }
@@ -149,7 +148,7 @@ class SectionForm extends Component {
   }
   handleTitleChange(event) {
     const v = event.target.value;
-    if ( v.length >= 10)
+    if ( v.length >= 3)
     {
         this.setState({...this.state, title: v, isValidTitle: true});
     }
@@ -183,7 +182,7 @@ class SectionForm extends Component {
   }
   handleBriefChange(event) {
     const v = event.target.value;
-    if ( v.length >= 10)
+    if ( v.length >= 3)
     {
         this.setState({...this.state, brief: v, isValidBrief: true});
     }
@@ -736,7 +735,7 @@ class SectionForm extends Component {
                                         Company Name*
                                     </label>
                                     <input type="text" className="form-control input-ios" id="exampleFormControlInput1" value={this.state.organization} onChange={this.handleOrganizationChange} />
-                                    <small className="text-muted">Your company's brand/trade name: without Inc., Ltd., B.V., Pte., etc.</small>
+                                    <small className="text-muted">Your company's brand/trade name: without Inc., Ltd., B.V., Pte., etc.</small><br></br>
                                     { this.state.isValidOrganization === false && (
                                         <small className="error-custom">enter valid organization</small>
                                     )}
@@ -747,7 +746,7 @@ class SectionForm extends Component {
                                         Job Position*
                                     </label>
                                     <input type="text" className="form-control input-ios" id="exampleFormControlInput1" value={this.state.title} onChange={this.handleTitleChange} />
-                                    <span className="text-muted">Please specify as single job position like "Marketing Manager" or "Node JS Developer", not a sentence like "Looking for PM / Biz Dev / Manager". If posting multiple roles, please create multiple job posts. A job post is limited to a single job. We only allow real jobs, absolutely no MLM-type courses "learn how to work online" please.</span>
+                                    <span className="text-muted">Please specify as single job position like "Lead Oncologist".</span><br></br>
                                     { this.state.isValidTitle === false && (
                                         <small className="error-custom">enter valid job title</small>
                                     )}
@@ -767,8 +766,10 @@ class SectionForm extends Component {
                                         <option value="Health-Records">Health Records</option>
                                         <option value="Scanning">X-ray & Scanning </option>
                                         <option value="Maternal-Health">Maternal Health</option>
+                                        <option value="Other">Other</option>
                                     </select>
                                     <span className="text-muted">This primary tag shows first and increases visibility in the main sections.</span>
+                                    <br></br>
                                     { this.state.isValidPrimaryTag === false && (
                                         <small className="error-custom">select valid tag</small>
                                     )}
@@ -779,7 +780,8 @@ class SectionForm extends Component {
                                         Extra Tags (comma separated)*
                                     </label>
                                     <input type="text" className="form-control input-ios" id="exampleFormControlInput1" value={this.state.tag} onChange={this.handleTagChange} />
-                                    <span className="text-muted">Use tags like industry and tech stack, and separate multiple tags by comma. Short words are preferred. The first 3 tags are shown on the site, the other tags aren't but the job will be shown on each tag specific page (like /remote-react-jobs). We also generate tags automatically after you post/edit.</span>
+                                    <span className="text-muted">Use tags related to the job e.g. Nursing, Medicine, Accounts</span>
+                                    <br></br>
                                     { this.state.isValidTag === false && (
                                         <small className="error-custom">enter valid tags, a comma list</small>
                                     )}
@@ -791,7 +793,7 @@ class SectionForm extends Component {
                                         Short Description*
                                     </label>
                                     <input type="text" className="form-control input-ios" id="exampleFormControlInput1" value={this.state.brief} onChange={this.handleBriefChange} />
-                                    <span className="text-muted">Use this field to add a brief description of your job. Keep it short but very precise. Include job position, department and a brief of work experience needed etc. 140 characters tops</span>
+                                    <span className="text-muted">Use this field to add a brief description of your job.</span><br></br>
                                     { this.state.isValidBrief === false && (
                                         <small className="error-custom">enter valid job description</small>
                                     )}
@@ -808,7 +810,7 @@ class SectionForm extends Component {
                                             return <option key={key} value={e.name}>{e.name}</option>;
                                         })}
                                     </select>
-                                    <span className="text-muted">Country where this job is available. This helps your job's visibility to relevant potential employee(s). Select one from the list.</span>
+                                    <span className="text-muted">Country where this job is available. This helps your job's visibility to relevant potential employee(s). Select one from the list.</span><br></br>
                                     { this.state.isValidCountry === false && (
                                         <small className="error-custom">select valid country</small>
                                     )}
@@ -817,7 +819,7 @@ class SectionForm extends Component {
                             <Col lg={12}>
                                 <div className="form-group mb-4">
                                     <label htmlFor="exampleFormControlInput1" className="flabel">
-                                        State (If in USA, ignore if not in USA)
+                                        State (Ignore if not in USA)
                                     </label>
                                     <select className="form-control input-ios" id="exampleFormControlInput1" value={this.state.state} onChange={this.handleStateChange}>
                                         <option value="nn">Select State</option>
@@ -825,7 +827,7 @@ class SectionForm extends Component {
                                             return <option key={key} value={e.name}>{e.name}</option>;
                                         })}
                                     </select>
-                                    <span className="text-muted">This applies to US jobs. Ignore  this field if you are not in USA.</span>
+                                    <span className="text-muted">This applies to US jobs. (Ignore  this field if you are not in USA.</span><br></br>
                                     { this.state.isValidState === false && (
                                         <small className="error-custom">select a valid state</small>
                                     )}
@@ -837,7 +839,7 @@ class SectionForm extends Component {
                                         City/Town*
                                     </label>
                                     <input placeholder="e.g. New York" type="text" className="form-control input-ios" id="exampleFormControlInput1" value={this.state.city} onChange={this.handleCityChange} />
-                                    <span className="text-muted">Narrow your job target location by providing the city in which the hired employee will be stationed. This improves your visibility on <u><b>Healthcare Okay</b></u></span>
+                                    <span className="text-muted">Narrow your job target location by providing the city in which the hired employee will be stationed. This improves your visibility on <u><b>Healthcare Okay</b></u></span><br></br>
                                     { this.state.isValidCity === false && (
                                         <small className="error-custom">enter valid city/town</small>
                                     )}
@@ -912,27 +914,27 @@ class SectionForm extends Component {
                                         Annual Salary Range(USD) *
                                     </label>
                                     <input type="text" placeholder="e.g. 55k-120k" className="form-control input-ios" id="exampleFormControlInput1" value={this.state.salaryRange} onChange={this.handleSalaryRangeChange} />
-                                    <span className="text-muted">Not required but HIGHLY recommended, because Google does NOT index jobs without salary data! Write it preferrably in US DOLLARS PER YEAR, like $75,000. If you pay hourly, or monthly, please convert to annual equivalent yourself (hourly rate * 8h * 22d * 12mo OR monthly salary * 12mo). Our robot can also convert it but it's not perfect and it might make a mistake if you enter it differently than annual. If not sure, write an indication of the salary.</span>
+                                    <span className="text-muted">Not required but HIGHLY recommended, because Google does NOT index jobs without salary data.</span><br></br>
                                     { this.state.isValidSalary === false && (
                                         <small className="error-custom">enter a valid range</small>
                                     )}
                                 </div>
                                 <div className="form-group mb-4">
                                     <label htmlFor="exampleFormControlInput1" className="flabel">
-                                        Company Email (stays private, for invoice + edit link)*
+                                        Company Email (stays private, for edit link)*
                                     </label>
                                     <input type="text" className="form-control input-ios" id="exampleFormControlInput1" value={this.state.coEmail} onChange={this.handleCoEmailChange} />
-                                    <span className="text-muted">Make sure this email is accessible by you! We use this to send the invoice and edit link. We can not and do not manually resend it!</span>
+                                    <span className="text-muted">Make sure this email is accessible by you! We use this to send the edit link. We can not and do not manually resend it!</span><br></br>
                                     { this.state.isValidCoEmail === false && (
                                         <small className="error-custom">enter a valid email</small>
                                     )}
                                 </div>
                                 <div className="form-group mb-4">
                                     <label htmlFor="exampleFormControlInput1" className="flabel">
-                                        Company Twitter Handle*
+                                        Company Twitter Handle(optional)
                                     </label>
                                     <input type="text" className="form-control input-ios" id="exampleFormControlInput1" value={this.state.coTwitter} onChange={this.handleCoTwitterChange} />
-                                    <span className="text-muted">Twitter username without @. Not required, but used to tag your company when we tweet out your job post.</span>
+                                    <span className="text-muted">Twitter username without @. Not required, but used to tag your company when we tweet out your job post.</span><br></br>
                                     { this.state.isValidCoTwitter === false && (
                                         <small className="error-custom">enter a valid email</small>
                                     )}
@@ -941,22 +943,6 @@ class SectionForm extends Component {
                                     <label htmlFor="exampleFormControlInput1" className="flabel">
                                         Job Description*
                                     </label>
-                                    {/* <Editor
-                                    apiKey={conf.tinymcekey}
-                                    cloudChannel='5-dev'
-                                    disabled={false}
-                                    id='jobdescription'
-                                    init= {{ height: 400, }}
-                                    initialValue={this.state.description}
-                                    inline={false}
-                                    onEditorChange={this.handleDescriptionChange}
-                                    plugins=''
-                                    tagName='div'
-                                    textareaName=''
-                                    toolbar=''
-                                    className='input-ios'
-                                    value=''
-                                    /> */}
                                     <CKEditor
                                     editor={ ClassicEditor }
                                     data={this.state.description}
@@ -966,6 +952,7 @@ class SectionForm extends Component {
                                         this.handleDescriptionChange(data);
                                     }}
                                     />
+                                    <br></br>
                                     { this.state.isValidDescription === false && (
                                         <small className="error-custom">enter valid job description</small>
                                     )}
@@ -983,6 +970,7 @@ class SectionForm extends Component {
                                         this.handleHowtoApplyChange(data);
                                     }}
                                     />
+                                    <br></br>
                                     { this.state.isValidHowToApply === false && (
                                         <small className="error-custom">enter valid process</small>
                                     )}
@@ -992,13 +980,14 @@ class SectionForm extends Component {
                                         Applications submission Link or Email*
                                     </label>
                                     <input type="text" className="form-control input-ios" id="exampleFormControlInput1" value={this.state.link} onChange={this.handleLinkChange} />
+                                    <br></br>
                                     { this.state.isValidLink === false && (
                                         <small className="error-custom">enter a valid job link</small>
                                     )}
                                 </div>
                                 <div className="form-group mb-4">
                                     <label htmlFor="exampleFormControlInput1" className="flabel">
-                                        Company Card*
+                                        Company Credit Card*
                                     </label>
                                     <Row>
                                         <Col lg={6}>
@@ -1023,9 +1012,6 @@ class SectionForm extends Component {
                                                 }}
                                                 />
                                             </div>
-                                            <span className="text-muted">
-                                                If you have "Auto renew/bump" enabled, make sure your card is chargeable in the future, or we won't be able to bump it.
-                                            </span>
                                         </Col>
                                         <Col lg={6}>
                                             <span className="text-muted">
@@ -1044,6 +1030,7 @@ class SectionForm extends Component {
                                     <span className="text-muted">
                                         If you specify your company address here, we'll put it on the Stripe receipt + invoice for your bookkeeping. We CANNOT add or edit this later for you. Make sure it's right.
                                     </span>
+                                    <br></br>
                                     { this.state.isValidInvAddress === false && (
                                         <small className="error-custom">enter a valid address</small>
                                     )}

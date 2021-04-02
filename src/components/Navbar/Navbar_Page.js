@@ -15,8 +15,8 @@ import ScrollspyNav from "./scrollSpy";
 //Import Stickey Header
 import StickyHeader from "react-sticky-header";
 
-import logolight from "../../assets/images/logo-light.png";
-import logodark from "../../assets/images/logo-light.png";
+import logolight from "../../assets/images/logo-dark.png";
+import logodark from "../../assets/images/logo-dark.png";
 
 class NavbarPage extends Component {
   prevScrollpos = 0;
@@ -39,7 +39,7 @@ class NavbarPage extends Component {
     };
     this.toggleLine = this.toggleLine.bind(this);
     this.handleScrollMenu = this.handleScrollMenu.bind(this);
-    this.handleActiveRobot = this.handleActiveRobot.bind(this);
+    // this.handleActiveRobot = this.handleActiveRobot.bind(this);
     this.signOut = this.signOut.bind(this);
     this.goHome = this.goHome.bind(this);
   }
@@ -54,15 +54,15 @@ class NavbarPage extends Component {
     this.setState({...this.state, hasRobot: false, robot: {}});
     this.forceUpdate();
   }
-  handleActiveRobot()
-  {
-    const robot = JSON.parse(localStorage.getItem("robot"));
-    console.log(robot);
-    if( robot )
-    {
-      this.setState({...this.state, hasRobot: true, robot: robot});
-    }
-  }
+  // handleActiveRobot()
+  // {
+  //   const robot = JSON.parse(localStorage.getItem("robot"));
+  //   // console.log(robot);
+  //   if( robot )
+  //   {
+  //     this.setState({...this.state, hasRobot: true, robot: robot});
+  //   }
+  // }
   handleScrollMenu = async () => {
     let currentScrollPos = window.pageYOffset;
     if (this.prevScrollpos > currentScrollPos) {
@@ -82,7 +82,7 @@ class NavbarPage extends Component {
   };
 
   componentDidMount() {
-    this.handleActiveRobot();
+    // this.handleActiveRobot();
     this.prevScrollpos = window.pageYOffset;
     window.addEventListener("scroll", this.handleScrollMenu);
     if (window.innerWidth <= 768) {
@@ -101,6 +101,16 @@ class NavbarPage extends Component {
   };
 
   render() {
+    return (
+      <NavbarBrand href="/" onClick={() => this.goHome()} className="logo">
+        <img
+          src={this.props.imglight ? logolight : logodark}
+          alt=""
+          className="logo-light logo-custom"
+          height={32}
+        />
+      </NavbarBrand>
+    );
     if( this.state.goHome )
     {
       return <Redirect to={this.state.gotUrl} />;

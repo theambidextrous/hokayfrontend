@@ -35,7 +35,7 @@ class JobTags extends Component {
     this.closeMessageModal = this.closeMessageModal.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const jobid = parseInt(this.props.location.pathname.split('/').slice(-1).pop());
     window.addEventListener("scroll", this.scrollNavigation, true);
   }

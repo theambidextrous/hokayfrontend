@@ -9,6 +9,8 @@ import footerlogo from "../../assets/images/logo-dark.png";
 import LoadingOverlay from 'react-loading-overlay';
 import BounceLoader from 'react-spinners/DotLoader'
 import Modal from 'react-modal';
+import {Helmet} from "react-helmet";
+
 
 import { subscribeAlert } from "../../api/api";
 class Index6 extends Component {
@@ -36,6 +38,7 @@ class Index6 extends Component {
   }
 
   componentDidMount() {
+    // console.log('path', window.location.pathname);
     window.addEventListener("scroll", this.scrollNavigation, true);
   }
 
@@ -148,8 +151,14 @@ class Index6 extends Component {
   render() {
     return (
       <React.Fragment>
+        {/* SEO meta */}
+        <Helmet>
+            <title>{process.env.REACT_APP_WEBSITE_NAME}</title>
+            <meta name="description" content={process.env.REACT_APP_WEBSITE_DESCRIPTION}/>
+            <meta name="keywords" content={process.env.REACT_APP_WEBSITE_META_KW}/>
+            <link rel="canonical" href={process.env.REACT_APP_DOMAIN} />
+        </Helmet>
         {/* Importing Navbar */}
-
         <NavbarPage
           navclass={this.state.navClass}
           imglight={this.state.imglight}

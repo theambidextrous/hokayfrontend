@@ -4,6 +4,11 @@ import { Row, Col } from "reactstrap";
 import TimeAgo from 'react-timeago';
 import hok from "../../assets/images/hok-dk.png";
 class ServiceBox extends Component {
+  componentDidMount() {
+  }
+
+  componentWillUnmount() {
+  }
   getForegroundColor(hexcolor){
     hexcolor = hexcolor.replace("#", "");
     var r = parseInt(hexcolor.substr(0,2),16);
@@ -56,7 +61,7 @@ class ServiceBox extends Component {
                     </Link>
                   </p>
                   <h5>
-                    <Link to={{pathname:'/jobs/job/' + service.id}} style={{color: this.getForegroundColor(this.determineHighlight(service))}} className="text-title-black">
+                    <Link to={{pathname:'/jobs/job/' + service.id + '/' + service.title.replace(/[\W_]/g, '-')}} style={{color: this.getForegroundColor(this.determineHighlight(service))}} className="text-title-black">
                     {service.title}
                     <span>
                       <img width={16} height={16} src={hok} style={{borderRadius: '100%',verticalAlign: 'middle', marginLeft:4,marginTop: -2}}/>
@@ -69,9 +74,11 @@ class ServiceBox extends Component {
                   <p></p>
                   <div className="s-tags">
                     {service.tags.split(",").map((tag, idx) => (
-                      <Link to={{pathname:'/jobs/tag/' + tag.trim()}} style={{color: this.getForegroundColor(this.determineHighlight(service))}}>
-                        <span style={{color:this.getForegroundColor(this.determineHighlight(service)), borderWidth:2, border:"solid", borderColor:this.getForegroundColor(this.determineHighlight(service)), padding:4, margin:4, display:"inline-block", borderRadius:8,fontSize:12}} className="tag-item">{tag}</span>
-                      </Link>
+                      idx <= 2 && tag.length > 2 && (
+                        <Link key={idx} to={{pathname:'/jobs/tag/' + tag.trim()}} style={{color: this.getForegroundColor(this.determineHighlight(service))}}>
+                          <span style={{color:this.getForegroundColor(this.determineHighlight(service)), borderWidth:2, border:"solid", borderColor:this.getForegroundColor(this.determineHighlight(service)), padding:4, margin:4, display:"inline-block", borderRadius:8,fontSize:12}} className="tag-item">{tag}</span>
+                        </Link>
+                      )
                     ))}
                   </div>
                   <p></p>
