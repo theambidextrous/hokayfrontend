@@ -143,7 +143,7 @@ class Services extends Component {
               description=""
             /> */}
             {/* post a job */}
-            <div className="div-link" onClick={() => this.gotoJobPost(process.env.REACT_APP_DOMAIN + '/employer/new/job')}>
+            {/* <div className="div-link" onClick={() => this.gotoJobPost(process.env.REACT_APP_DOMAIN + '/employer/new/job')}>
               <Row className="justify-content-center apply-job-content">
                 <div className="col-lg-12">
                   <p>
@@ -154,13 +154,13 @@ class Services extends Component {
                   </p>
                 </div>
               </Row>
-            </div>
+            </div> */}
             {/* search bar */}
             <Row className="justify-content-center">
               <Col lg={12}>
                 <div className="text-center hero-6-content s-form">
                   <form action="#">
-                    <input type="text" value={this.state.search} onChange={this.handleSearch} placeholder="Search for healthcare jobs" />
+                    <input type="text" value={this.state.search} onChange={this.handleSearch} placeholder="Title, location, city, state, company" />
                     <button
                       type="submit"
                       className="btn rounded-pill"
@@ -173,26 +173,47 @@ class Services extends Component {
             </Row>
             <br></br>
             {/* Primary tags */}
-            <Row className="justify-content-center tag-area">
-              <Col lg={12} className="bbb">
-                <ListGroup horizontal>
-                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN}>Healthcare jobs</ListGroupItem>
-                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/physician-assistant-jobs'}>physician assistant jobs</ListGroupItem>
-                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/pharmacy-technician-jobs'}>pharmacy technician jobs</ListGroupItem>
-                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/pharmacist-jobs'}>pharmacist jobs</ListGroupItem>
-                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/medical-assistant-jobs'}>medical assistant jobs</ListGroupItem>
-                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/psychologist-jobs'}>psychologist jobs</ListGroupItem>
-                </ListGroup>
-                
-                <ListGroup horizontal>
+            <Row className="tag-area">
+              <Col lg={2} className="bbb">
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN}>Healthcare jobs</ListGroupItem>
+              </Col>
+              <Col lg={2} className="bbb">
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/physician-assistant-jobs'}>physician assistant jobs</ListGroupItem>
+              </Col>
+              <Col lg={2} className="bbb">
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/pharmacy-technician-jobs'}>pharmacy technician jobs</ListGroupItem>
+              </Col>
+              <Col lg={2} className="bbb">
+                 <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/pharmacist-jobs'}>pharmacist jobs</ListGroupItem>
+              </Col>
+              
+              <Col lg={2} className="bbb">
+                 <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/medical-assistant-jobs'}>medical assistant jobs</ListGroupItem>
+              </Col>
+              <Col lg={2} className="bbb">
+                 <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/psychologist-jobs'}>psychologist jobs</ListGroupItem>
+              </Col>
+
+              <Col lg={2} className="bbb">
                 <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/nurse-jobs'}>nurse jobs</ListGroupItem>
-                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/rn-jobs'}>rn jobs</ListGroupItem>
-                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/nurse-practitioner-jobs'}>nurse practitioner jobs</ListGroupItem>
-                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/dental-assistant-jobs'}>dental assistant jobs</ListGroupItem>
-                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/physical-therapist-jobs'}>physical therapist jobs</ListGroupItem>
-                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/ occupational-therapist-jobs'}>occupational therapist jobs</ListGroupItem>
-                  <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/entist-jobs'}>dentist jobs</ListGroupItem>
-              </ListGroup>
+              </Col>
+              <Col lg={2} className="bbb">
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/rn-jobs'}>rn jobs</ListGroupItem>
+              </Col>
+              <Col lg={2} className="bbb">
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/nurse-practitioner-jobs'}>nurse practitioner jobs</ListGroupItem>
+              </Col>
+              <Col lg={2} className="bbb">
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/dental-assistant-jobs'}>dental assistant jobs</ListGroupItem>
+              </Col>
+              <Col lg={2} className="bbb">
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/physical-therapist-jobs'}>physical therapist jobs</ListGroupItem>
+              </Col>
+              <Col lg={2} className="bbb">
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/ occupational-therapist-jobs'}>occupational therapist jobs</ListGroupItem>
+              </Col>
+              <Col lg={2} className="bbb">
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/entist-jobs'}>dentist jobs</ListGroupItem>
               </Col>
             </Row>
             <br></br>

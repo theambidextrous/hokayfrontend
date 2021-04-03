@@ -705,10 +705,10 @@ class SectionForm extends Component {
     //   console.log(states);
     return (
         <form className="registration-form" onSubmit={this.handleSubmit}>
-        <section className="hero-6-bg smaller-mid position-relative" id="home">
+        {/* <section className="hero-6-bg smaller-mid position-relative" id="home"> */}
           <Container style={{minWidth:'100%'}}>
             <Row className="justify-content-center">
-              <Col lg={12}>
+              <Col lg={12} className={"add-job-col"}>
                 <div className="hero-6-content">
                 <h1 className="text-dark text-center hero-6-title font-weight-medium mb-4 line-height-1_4 hcustom">
                     Hire HealthCare Professionals
@@ -1109,7 +1109,7 @@ class SectionForm extends Component {
                 </Row>
             </StickyFooter>
           </Container>
-        </section>
+        {/* </section> */}
         </form>
     );
   }

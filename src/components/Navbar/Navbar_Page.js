@@ -8,6 +8,8 @@ import {
   NavLink,
   NavbarToggler,
   NavbarBrand,
+  Row,
+  Col,
 } from "reactstrap";
 import { Link, Redirect } from "react-router-dom";
 import ScrollspyNav from "./scrollSpy";
@@ -42,11 +44,15 @@ class NavbarPage extends Component {
     // this.handleActiveRobot = this.handleActiveRobot.bind(this);
     this.signOut = this.signOut.bind(this);
     this.goHome = this.goHome.bind(this);
+    this.gotoJobPost = this.gotoJobPost.bind(this);
   }
 
   goHome(url)
   {
     this.setState({...this.state, goHome: true, gotUrl: url});
+  }
+  gotoJobPost = (link) => {
+    window.location.href = link;
   }
   signOut()
   {
@@ -102,14 +108,21 @@ class NavbarPage extends Component {
 
   render() {
     return (
-      <NavbarBrand href="/" onClick={() => this.goHome()} className="logo">
-        <img
-          src={this.props.imglight ? logolight : logodark}
-          alt=""
-          className="logo-light logo-custom"
-          height={32}
-        />
-      </NavbarBrand>
+      <Row className="justify-content-center header-row">
+        <Col lg={8}>
+          <NavbarBrand href="/" onClick={() => this.goHome()} className="logo">
+            <img
+              src={this.props.imglight ? logolight : logodark}
+              alt=""
+              className="logo-light logo-custom"
+              height={32}
+            />
+          </NavbarBrand>
+        </Col>
+        <Col lg={4} onClick={() => this.gotoJobPost(process.env.REACT_APP_DOMAIN + '/employer/new/job')}>
+          <a href={process.env.REACT_APP_DOMAIN + '/employer/new/job'} className="btn btn-orange btn-pointed small-btn btn-action a-btn post-job ">Post a job</a>
+        </Col>
+      </Row>
     );
     if( this.state.goHome )
     {

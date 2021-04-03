@@ -450,7 +450,7 @@ class Section extends Component {
         {/* PRELOAD START */}
         <Elements stripe={stripePromise}>
         <form className="registration-form" onSubmit={this.handleSubmit}>
-        <section className="hero-6-bg smaller-mid position-relative" id="home">
+        {/* <section className="hero-6-bg smaller-mid position-relative" id="home"> */}
           <Container style={{minWidth:'100%'}}>
             <Row className="justify-content-center">
               <Col lg={12}>
@@ -823,7 +823,7 @@ class Section extends Component {
                 </Row>
             </StickyFooter>
           </Container>
-        </section>
+        {/* </section> */}
         </form>
         </Elements>
         {/* HERO END  */}

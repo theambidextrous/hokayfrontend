@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, ListGroupItem, ListGroup,} from "reactstrap";
 import { withRouter, Link, } from 'react-router-dom'
 
 //Import Spinner Box
@@ -210,19 +210,6 @@ class Services extends Component {
                 </p>
               </div>
             </Row> */}
-            {/* post a job */}
-            <div className="div-link" onClick={() => this.gotoJobPost(process.env.REACT_APP_DOMAIN + '/employer/new/job')}>
-              <Row className="justify-content-center apply-job-content">
-                <div className="col-lg-12">
-                  <p style={{marginBottom: 0}}>
-                      <span className="call-to-action">
-                      👉 Hiring in <u>Healthcare</u>? Reach 1,200,000+ Job seekers on the 🏆 #1 Healthcare jobs board 
-                      </span>
-                      <a href={process.env.REACT_APP_DOMAIN + '/employer/new/job'} className="btn btn-orange btn-pointed small-btn btn-action a-btn post-job ">Post a job</a>
-                  </p>
-                </div>
-              </Row>
-            </div>
             {/* current tag */}
             <Row className="justify-content-center tag-content-c">
                 <div className="col-lg-12">
@@ -240,7 +227,7 @@ class Services extends Component {
               <Col lg={12}>
                 <div className="text-center hero-6-content s-form">
                   <form action="#">
-                    <input type="text" value={this.state.search} onChange={this.handleSearch} placeholder="Search for healthcare jobs" />
+                    <input type="text" value={this.state.search} onChange={this.handleSearch} placeholder="Title, location, city, state, company" />
                     <button
                       type="submit"
                       className="btn rounded-pill"
@@ -251,6 +238,52 @@ class Services extends Component {
                 </div>
               </Col>
             </Row>
+            <br></br>
+            {/* Primary tags */}
+            <Row className="tag-area">
+              <Col lg={2} className="bbb">
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN}>Healthcare jobs</ListGroupItem>
+              </Col>
+              <Col lg={2} className="bbb">
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/physician-assistant-jobs'}>physician assistant jobs</ListGroupItem>
+              </Col>
+              <Col lg={2} className="bbb">
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/pharmacy-technician-jobs'}>pharmacy technician jobs</ListGroupItem>
+              </Col>
+              <Col lg={2} className="bbb">
+                 <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/pharmacist-jobs'}>pharmacist jobs</ListGroupItem>
+              </Col>
+              
+              <Col lg={2} className="bbb">
+                 <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/medical-assistant-jobs'}>medical assistant jobs</ListGroupItem>
+              </Col>
+              <Col lg={2} className="bbb">
+                 <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/psychologist-jobs'}>psychologist jobs</ListGroupItem>
+              </Col>
+
+              <Col lg={2} className="bbb">
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/nurse-jobs'}>nurse jobs</ListGroupItem>
+              </Col>
+              <Col lg={2} className="bbb">
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/rn-jobs'}>rn jobs</ListGroupItem>
+              </Col>
+              <Col lg={2} className="bbb">
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/nurse-practitioner-jobs'}>nurse practitioner jobs</ListGroupItem>
+              </Col>
+              <Col lg={2} className="bbb">
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/dental-assistant-jobs'}>dental assistant jobs</ListGroupItem>
+              </Col>
+              <Col lg={2} className="bbb">
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/physical-therapist-jobs'}>physical therapist jobs</ListGroupItem>
+              </Col>
+              <Col lg={2} className="bbb">
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/ occupational-therapist-jobs'}>occupational therapist jobs</ListGroupItem>
+              </Col>
+              <Col lg={2} className="bbb">
+                <ListGroupItem className={"tag-area-link"} tag="a" href={process.env.REACT_APP_DOMAIN + '/jobs/tag/entist-jobs'}>dentist jobs</ListGroupItem>
+              </Col>
+            </Row>
+            <br></br>
             <Row className="align-items-center">
               <div className="col-lg-12">
                 <p> <span className="mr-2">Share Page</span> 
